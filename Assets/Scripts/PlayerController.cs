@@ -7,7 +7,9 @@ public class PlayerController : MonoBehaviour
     private float horizontalInput;
     private float verticalInput;
     [SerializeField]
-    private float speed = 10;
+    private float moveSpeed = 10;
+    [SerializeField]
+    private float rotationSpeed = 720;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         PlayerMovement();
+        PlayerRotation();
     }
 
     void PlayerMovement()
@@ -26,8 +29,21 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        transform.Translate(Vector3.right * Time.deltaTime * horizontalInput * speed);
-        transform.Translate(Vector3.forward * Time.deltaTime * verticalInput * speed);
+        transform.Translate(Vector3.right * Time.deltaTime * horizontalInput * moveSpeed, Space.World);
+        transform.Translate(Vector3.forward * Time.deltaTime * verticalInput * moveSpeed, Space.World);
+
+    }
+
+    void PlayerRotation()
+    {
+        Vector3 movementDirection = new Vector3(horizontalInput, 0, verticalInput);
+        movementDirection.Normalize();
+
+        if (movementDirection != Vector3.zero)
+        {
+            Quaternion lookDirection = Quaternion.LookRotation(movementDirection, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, lookDirection, rotationSpeed * Time.deltaTime);
+        }
 
     }
 }
