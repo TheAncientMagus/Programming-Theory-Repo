@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameObject playerWeapon;
     private float horizontalInput;
     private float verticalInput;
     [SerializeField]
     private float moveSpeed = 10;
     [SerializeField]
     private float rotationSpeed = 720;
+    private float meleeTimer = 0;
+    private bool isMelee = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayerMovement();
         PlayerRotation();
+        PlayerMelee();
     }
 
     void PlayerMovement()
@@ -45,5 +49,32 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, lookDirection, rotationSpeed * Time.deltaTime);
         }
 
+    }
+
+    void PlayerMelee()
+    {
+        if (Input.GetMouseButtonDown(0) && (isMelee == false))
+        {
+            isMelee = true;
+            playerWeapon.SetActive(true);
+            meleeTimer = 1;
+            StartCoroutine(PlayerMeleeAnimation());
+        }
+    }
+
+    IEnumerator PlayerMeleeAnimation()
+    {
+        while (meleeTimer >= 0)
+        {
+            meleeTimer -= Time.deltaTime;
+            playerWeapon.transform.RotateAround(transform.position, Vector3.up, 360 * Time.deltaTime);
+            yield return null;
+        }
+
+        if (meleeTimer <= 0)
+        {
+            isMelee = false;
+            playerWeapon.SetActive(false);
+        }
     }
 }
