@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public GameObject playerMeleeWeapon;
     public GameObject playerRangedWeapon;
+    public GameObject playerWeaponHolder;
     private float horizontalInput;
     private float verticalInput;
     [SerializeField]
@@ -38,6 +39,8 @@ public class PlayerController : MonoBehaviour
 
         transform.Translate(Vector3.right * Time.deltaTime * horizontalInput * moveSpeed, Space.World);
         transform.Translate(Vector3.forward * Time.deltaTime * verticalInput * moveSpeed, Space.World);
+
+        playerWeaponHolder.transform.position = transform.position;
 
     }
 
