@@ -8,12 +8,12 @@ public class PlayerController : MonoBehaviour
     public GameObject playerRangedWeapon;
     public GameObject playerWeaponHolder;
     private float horizontalInput;
-    private float verticalInput;
-    [SerializeField]
-    private float moveSpeed = 10;
-    [SerializeField]
-    private float rotationSpeed = 720;
+    private float verticalInput; 
+    [SerializeField]private float moveSpeed = 10;
+    [SerializeField]private float rotationSpeed = 720;
     private float meleeTimer = 0;
+    private float xBoundary = 34.5f;
+    private float zBoundary = 34.5f;
     private bool isMelee = false;
 
     // Start is called before the first frame update
@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         PlayerMovement();
+        PlayerBoundary();
         PlayerRotation();
         PlayerMelee();
         PlayerRanged();
@@ -42,6 +43,29 @@ public class PlayerController : MonoBehaviour
 
         playerWeaponHolder.transform.position = transform.position;
 
+    }
+
+    void PlayerBoundary()
+    {
+        if (transform.position.x > xBoundary)
+        {
+            transform.position = new Vector3(xBoundary, transform.position.y, transform.position.z);
+        }
+
+        if (transform.position.x < -xBoundary)
+        {
+            transform.position = new Vector3(-xBoundary, transform.position.y, transform.position.z);
+        }
+
+        if (transform.position.z > zBoundary)
+        {
+            transform.position = new Vector3(zBoundary, transform.position.y, transform.position.z);
+        }
+
+        if (transform.position.z < -zBoundary)
+        {
+            transform.position = new Vector3(zBoundary, transform.position.y, transform.position.z);
+        }
     }
 
     // Player faces the direction of movement

@@ -6,6 +6,7 @@ public class MoveForward : MonoBehaviour
 {
     [SerializeField]
     private float projectileSpeed = 20;
+    private float boundary = 34.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -27,22 +28,22 @@ public class MoveForward : MonoBehaviour
 
     void DestroyOutOfBounds()
     {
-        if (transform.position.x > 35)
+        if (transform.position.x > boundary)
         {
             Destroy(gameObject);
         }
 
-        if (transform.position.x < -35)
+        if (transform.position.x < -boundary)
         {
             Destroy(gameObject);
         }
 
-        if (transform.position.z > 35)
+        if (transform.position.z > boundary)
         {
             Destroy(gameObject);
         }
 
-        if (transform.position.z < -35)
+        if (transform.position.z < -boundary)
         {
             Destroy(gameObject);
         }
