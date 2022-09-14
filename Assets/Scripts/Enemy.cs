@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     protected int repelSpeed;
     protected int attackDamage;
     protected int attackSpeed;
-    protected bool isAttack = false;
+    [SerializeField]protected bool isAttack = false;
 
     void Awake()
     {
@@ -49,7 +49,7 @@ public class Enemy : MonoBehaviour
         Vector3 lookDirection = (player.transform.position - transform.position).normalized;
         if (isAttack == false)
         {
-            transform.Translate(lookDirection * moveSpeed * Time.deltaTime);
+            transform.Translate(moveSpeed * Time.deltaTime * lookDirection);
         }
         
     }
@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         
 

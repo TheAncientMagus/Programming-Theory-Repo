@@ -6,7 +6,7 @@ public class MoveForward : MonoBehaviour
 {
     [SerializeField]
     private float projectileSpeed = 20;
-    private float boundary = 34.5f;
+    public float boundary = 34.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -21,12 +21,12 @@ public class MoveForward : MonoBehaviour
         DestroyOutOfBounds();
     }
 
-    void Move()
+    public void Move()
     {
         transform.Translate(Vector3.forward * projectileSpeed * Time.deltaTime, Space.Self);
     }
 
-    void DestroyOutOfBounds()
+    public void DestroyOutOfBounds()
     {
         if (transform.position.x > boundary)
         {
