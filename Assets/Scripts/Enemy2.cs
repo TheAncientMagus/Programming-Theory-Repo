@@ -22,6 +22,7 @@ public class Enemy2 : Enemy
     {
         EnemyMovementAI();
         EnemyAttackAI();
+        EnemyBoundary();
     }
 
     public override void SetEnemyStats()

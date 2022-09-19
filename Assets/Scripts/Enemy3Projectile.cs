@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyProjectile : MoveForward
+public class Enemy3Projectile : MoveForward
 {
-    [SerializeField]private Enemy2 enemy2;
+    [SerializeField]private Enemy3 enemy3;
 
     private void Awake()
     {
-        enemy2 = GetComponentInParent<Enemy2>();
+        enemy3 = GetComponentInParent<Enemy3>();
         transform.parent = null;
     }
 
@@ -31,7 +31,7 @@ public class EnemyProjectile : MoveForward
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            enemy2.EnemyRangedDamage();
+            enemy3.EnemyMidRangedDamage();
             Destroy(gameObject);
         }
     }

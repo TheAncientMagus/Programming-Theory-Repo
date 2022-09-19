@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameObject playerModel;
     public GameObject playerMeleeWeapon;
     public GameObject playerRangedWeapon;
     public GameObject playerWeaponHolder;
@@ -42,6 +43,8 @@ public class PlayerController : MonoBehaviour
         transform.Translate(Vector3.forward * Time.deltaTime * verticalInput * moveSpeed, Space.World);
 
         playerWeaponHolder.transform.position = transform.position;
+        playerModel.transform.position = transform.position;
+
 
     }
 
@@ -59,12 +62,12 @@ public class PlayerController : MonoBehaviour
 
         if (transform.position.z > zBoundary)
         {
-            transform.position = new Vector3(zBoundary, transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y, zBoundary);
         }
 
         if (transform.position.z < -zBoundary)
         {
-            transform.position = new Vector3(zBoundary, transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y, -zBoundary);
         }
     }
 

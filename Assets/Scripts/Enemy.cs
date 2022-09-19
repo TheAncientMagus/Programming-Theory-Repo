@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected GameObject player;
     [SerializeField] protected Rigidbody enemyRb;
     [SerializeField] protected Health playerHealth;
+    protected float xBoundary = 34.5f;
+    protected float zBoundary = 34.5f;
     protected int currentHealth;
     protected int maxHealth;
     protected int moveSpeed;
@@ -27,6 +29,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         EnemyMovementAI();
+        EnemyBoundary();
     }
 
     public virtual void SetEnemyStats()
@@ -35,7 +38,7 @@ public class Enemy : MonoBehaviour
         repelSpeed = 10;
         attackDamage = 10;
         attackSpeed = 2;
-        maxHealth = 10;
+        maxHealth = 15;
         currentHealth = maxHealth;
     }
 
@@ -52,6 +55,29 @@ public class Enemy : MonoBehaviour
             transform.Translate(moveSpeed * Time.deltaTime * lookDirection);
         }
         
+    }
+
+    public void EnemyBoundary()
+    {
+        if (transform.position.x > xBoundary)
+        {
+            transform.position = new Vector3(xBoundary, transform.position.y, transform.position.z);
+        }
+
+        if (transform.position.x < -xBoundary)
+        {
+            transform.position = new Vector3(-xBoundary, transform.position.y, transform.position.z);
+        }
+
+        if (transform.position.z > zBoundary)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, zBoundary);
+        }
+
+        if (transform.position.z < -zBoundary)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, -zBoundary);
+        }
     }
 
     public virtual void EnemyAttackAI()
