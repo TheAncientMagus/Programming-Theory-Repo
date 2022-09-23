@@ -24,6 +24,6 @@ public class HealthUISystem : MonoBehaviour
     public void SetHealth(int hp)
     {
         healthBar.value = hp;
-        playerHealthText.SetText("HP: " + hp + "/100");
+        playerHealthText.SetText("HP: " + hp + "/" + playerHealth.maxHealth);
     }
 }

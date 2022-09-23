@@ -49,6 +49,7 @@ public class Enemy : MonoBehaviour
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
+            playerController.LevelUp(10);
             Destroy(gameObject);
         }
     }

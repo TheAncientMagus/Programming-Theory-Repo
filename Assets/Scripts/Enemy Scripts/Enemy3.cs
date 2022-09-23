@@ -39,6 +39,16 @@ public class Enemy3 : Enemy
 
     }
 
+    public override void DamageEnemy(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            playerController.LevelUp(25);
+            Destroy(gameObject);
+        }
+    }
+
     // Enemy3 will move towards the player if outside minDistance
     // Once at minDistance Enemy 3 will cirlce around the player until they finish attacking
     // They will then run away from the player

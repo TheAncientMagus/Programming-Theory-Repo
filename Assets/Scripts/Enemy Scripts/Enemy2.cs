@@ -35,6 +35,16 @@ public class Enemy2 : Enemy
         currentHealth = maxHealth;
     }
 
+    public override void DamageEnemy(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            playerController.LevelUp(5);
+            Destroy(gameObject);
+        }
+    }
+
     public override void EnemyMovementAI()
     {
         Vector3 fleeDirection = (transform.position - player.transform.position).normalized;

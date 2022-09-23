@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public GameObject playerMeleeWeapon;
     public GameObject playerRangedWeapon;
     public GameObject playerWeaponHolder;
+    public TextMeshProUGUI xpText;
     public Health playerHealth;
     public Material playerMaterial;
     public Material healMaterial;
@@ -15,6 +17,8 @@ public class PlayerController : MonoBehaviour
     public int meleeDamage;
     public int rangedDamage;
     private int healValue;
+    public int level = 1;
+    public int experience = 0;
     private Color originalColor;
     private Color lerpedColor;
     private float horizontalInput;
@@ -56,6 +60,24 @@ public class PlayerController : MonoBehaviour
         meleeDamage = 10;
         rangedDamage = 5;
         healValue = 25;
+    }
+
+    public void LevelUp(int xp)
+    {
+        experience += xp;
+        if (experience >= 100)
+        {
+            level += 1;
+            maxHP += 10;
+            playerHealth.maxHealth = maxHP;
+            meleeDamage += 5;
+            rangedDamage += 5;
+            healValue += 10;
+
+            experience -= 100;
+        }
+        xpText.SetText("Level " + level + " : XP " + experience + "/100");
+
     }
 
     // Player movement controls
@@ -163,6 +185,10 @@ public class PlayerController : MonoBehaviour
     IEnumerator HealCooldown()
     {
         playerHealth.HealPlayer(healValue);
+        if (playerHealth.currentHealth > playerHealth.maxHealth)
+        {
+            playerHealth.currentHealth = playerHealth.maxHealth;
+        }
         yield return new WaitForSeconds(healTimer);
         isHeal = false;
         lerpTime = 0;
