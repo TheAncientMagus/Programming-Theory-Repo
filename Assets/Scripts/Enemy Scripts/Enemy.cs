@@ -7,9 +7,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected GameObject player;
     [SerializeField] protected Rigidbody enemyRb;
     [SerializeField] protected Health playerHealth;
+    [SerializeField] protected PlayerController playerController;
     protected float xBoundary = 34.5f;
     protected float zBoundary = 34.5f;
-    protected int currentHealth;
+    [SerializeField] protected int currentHealth;
     protected int maxHealth;
     protected int moveSpeed;
     protected int repelSpeed;
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour
         player = GameObject.Find("Player");
         playerHealth = GameObject.Find("Player").GetComponent<Health>();
         enemyRb = gameObject.GetComponent<Rigidbody>();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         SetEnemyStats();
     }
 
@@ -45,6 +47,10 @@ public class Enemy : MonoBehaviour
     public virtual void DamageEnemy(int damage)
     {
         currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public virtual void EnemyMovementAI()
@@ -91,7 +97,15 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.CompareTag("Player Melee Weapon"))
+        {
+            DamageEnemy(playerController.meleeDamage);
+        }
+
+        if (collision.gameObject.CompareTag("Player Ranged Weapon"))
+        {
+            DamageEnemy(playerController.rangedDamage);
+        }
 
         if ( collision.gameObject.CompareTag("Player") && isAttack == false)
         {

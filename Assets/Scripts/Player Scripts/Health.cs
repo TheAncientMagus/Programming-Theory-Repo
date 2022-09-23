@@ -17,15 +17,19 @@ public class Health : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            DamagePlayer(10);
-        }
+        
     }
 
     public void DamagePlayer(int damage)
     {
         currentHealth -= damage;
+
+        healthBar.value = currentHealth;
+    }
+
+    public void HealPlayer(int heal)
+    {
+        currentHealth += heal;
 
         healthBar.value = currentHealth;
     }

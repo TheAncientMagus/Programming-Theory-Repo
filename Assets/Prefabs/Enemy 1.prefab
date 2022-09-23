@@ -130,3 +130,6 @@ MonoBehaviour:
   player: {fileID: 0}
   enemyRb: {fileID: 0}
   playerHealth: {fileID: 0}
+  playerController: {fileID: 0}
+  currentHealth: 0
+  isAttack: 0

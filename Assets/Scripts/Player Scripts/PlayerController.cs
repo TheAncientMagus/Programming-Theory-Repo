@@ -8,19 +8,35 @@ public class PlayerController : MonoBehaviour
     public GameObject playerMeleeWeapon;
     public GameObject playerRangedWeapon;
     public GameObject playerWeaponHolder;
+    public Health playerHealth;
+    public Material playerMaterial;
+    public Material healMaterial;
+    public int maxHP;
+    public int meleeDamage;
+    public int rangedDamage;
+    private int healValue;
+    private Color originalColor;
+    private Color lerpedColor;
     private float horizontalInput;
-    private float verticalInput; 
-    [SerializeField]private float moveSpeed = 10;
-    [SerializeField]private float rotationSpeed = 720;
+    private float verticalInput;
+    [SerializeField] private float moveSpeed = 10;
+    [SerializeField] private float rotationSpeed = 720;
     private float meleeTimer = 0;
     private float xBoundary = 34.5f;
     private float zBoundary = 34.5f;
+    private float lerpTime = 0;
+    private int rangeTimer = 1;
+    private int healTimer = 5;
     private bool isMelee = false;
+    private bool isRange = false;
+    private bool isHeal = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        originalColor = new Color(.03f, .9f, .8f, 1);
+        playerMaterial.color = originalColor;
+        PlayerStats();
     }
 
     // Update is called once per frame
@@ -31,6 +47,15 @@ public class PlayerController : MonoBehaviour
         PlayerRotation();
         PlayerMelee();
         PlayerRanged();
+        PlayerHeal();
+    }
+
+    private void PlayerStats()
+    {
+        maxHP = 100;
+        meleeDamage = 10;
+        rangedDamage = 5;
+        healValue = 25;
     }
 
     // Player movement controls
@@ -100,11 +125,48 @@ public class PlayerController : MonoBehaviour
     // Player ranged attack controls
     void PlayerRanged()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && isRange == false)
         {
+            isRange = true;
             Instantiate(playerRangedWeapon, transform.position, transform.rotation);
+            StartCoroutine(RangeCooldown());
         }
-        
+
+    }
+
+    void PlayerHeal()
+    {
+
+        if (Input.GetKeyDown(KeyCode.Space) && isHeal == false)
+        {
+            isHeal = true;
+            StartCoroutine(HealCooldown());
+        }
+
+        if (isHeal == true)
+        {
+            lerpedColor = Color.Lerp(healMaterial.color, originalColor, lerpTime);
+            playerMaterial.color = lerpedColor;
+            if (lerpTime < 1)
+            {
+                lerpTime += Time.deltaTime / 5;
+            }
+        }
+    }
+
+    IEnumerator RangeCooldown()
+    {
+        yield return new WaitForSeconds(rangeTimer);
+        isRange = false;
+    }
+
+    IEnumerator HealCooldown()
+    {
+        playerHealth.HealPlayer(healValue);
+        yield return new WaitForSeconds(healTimer);
+        isHeal = false;
+        lerpTime = 0;
+        playerMaterial.color = originalColor;
     }
 
     // Melee animation plays until the meleeTimer is >= 0 and then resets playerMeleeWeapon position and rotation

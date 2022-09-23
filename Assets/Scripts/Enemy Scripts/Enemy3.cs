@@ -101,6 +101,19 @@ public class Enemy3 : Enemy
         playerHealth.DamagePlayer(attackDamage);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player Melee Weapon"))
+        {
+            DamageEnemy(playerController.meleeDamage);
+        }
+
+        if (collision.gameObject.CompareTag("Player Ranged Weapon"))
+        {
+            DamageEnemy(playerController.rangedDamage);
+        }
+    }
+
     IEnumerator EnemyMidRangedAttack()
     {
         if (isAttack == true)

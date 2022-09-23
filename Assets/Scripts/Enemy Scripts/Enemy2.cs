@@ -67,6 +67,19 @@ public class Enemy2 : Enemy
         playerHealth.DamagePlayer(attackDamage);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player Melee Weapon"))
+        {
+            DamageEnemy(playerController.meleeDamage);
+        }
+
+        if (collision.gameObject.CompareTag("Player Ranged Weapon"))
+        {
+            DamageEnemy(playerController.rangedDamage);
+        }
+    }
+
     IEnumerator EnemyRangedAttack()
     {
         if (isAttack == true)
