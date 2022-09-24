@@ -6,7 +6,7 @@ public class Enemy2 : Enemy
 {
     public GameObject enemyProjectile;
     [SerializeField]private Transform projectileSpawnPoint;
-    private float minDistance = 10;
+    private float minDistance = 20;
     [SerializeField] private float playerDistance;
     private int rotationSpeed = 720;
 

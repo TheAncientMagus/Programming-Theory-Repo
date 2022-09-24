@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour
         {
             isMelee = true;
             playerMeleeWeapon.SetActive(true);
-            meleeTimer = 1;
+            meleeTimer = .5f;
             StartCoroutine(PlayerMeleeAnimation());
         }
     }
@@ -201,7 +201,7 @@ public class PlayerController : MonoBehaviour
         while (meleeTimer >= 0)
         {
             meleeTimer -= Time.deltaTime;
-            playerMeleeWeapon.transform.RotateAround(transform.position, Vector3.up, 360 * Time.deltaTime);
+            playerMeleeWeapon.transform.RotateAround(transform.position, Vector3.up, 720 * Time.deltaTime);
             yield return null;
         }
 

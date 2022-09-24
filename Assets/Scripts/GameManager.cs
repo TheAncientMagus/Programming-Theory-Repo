@@ -56,6 +56,36 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void Round2()
+    {
+        roundsUI.SetActive(false);
+        Invoke(nameof(Enemy1Spawner), 1);
+        Invoke(nameof(Enemy2Spawner), 3);
+        Invoke(nameof(Enemy3Spawner), 5);
+
+        Invoke(nameof(Enemy1Spawner), 6);
+        Invoke(nameof(Enemy2Spawner), 9);
+        Invoke(nameof(Enemy3Spawner), 13);
+        Invoke(nameof(RoundOngoing), 13.1f);
+    }
+
+    public void Round3()
+    {
+        roundsUI.SetActive(false);
+        Invoke(nameof(Enemy1Spawner), 1);
+        Invoke(nameof(Enemy2Spawner), 3);
+        Invoke(nameof(Enemy3Spawner), 5);
+
+        Invoke(nameof(Enemy1Spawner), 6);
+        Invoke(nameof(Enemy2Spawner), 9);
+        Invoke(nameof(Enemy3Spawner), 13);
+
+        Invoke(nameof(Enemy1Spawner), 14);
+        Invoke(nameof(Enemy2Spawner), 17);
+        Invoke(nameof(Enemy3Spawner), 21);
+        Invoke(nameof(RoundOngoing), 21.1f);
+    }
+
     private void RoundOngoing()
     {
         allEnemiesSpawned = true;
