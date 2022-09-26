@@ -9,6 +9,12 @@ public class HealthUISystem : MonoBehaviour
     public Slider healthBar;
     public Health playerHealth;
     public TextMeshProUGUI playerHealthText;
+    private NameData nameData;
+
+    private void Awake()
+    {
+        nameData = GameObject.Find("Name Data").GetComponent<NameData>();
+    }
 
     void Start()
     {
@@ -24,6 +30,6 @@ public class HealthUISystem : MonoBehaviour
     public void SetHealth(int hp)
     {
         healthBar.value = hp;
-        playerHealthText.SetText("HP: " + hp + "/" + playerHealth.maxHealth);
+        playerHealthText.SetText( nameData.playerName + "'s HP: " + hp + "/" + playerHealth.maxHealth);
     }
 }

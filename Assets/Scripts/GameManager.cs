@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,10 +9,16 @@ public class GameManager : MonoBehaviour
     public GameObject enemy2;
     public GameObject enemy3;
     public GameObject roundsUI;
-    public Button round1Button;
+    public GameObject round1Button;
+    public GameObject round2Button;
+    public GameObject round3Button;
+    public GameObject mainMenuButton;
     private Vector3 enemy1Spawn = new(0, 1, -15);
     private Vector3 enemy2Spawn = new(0, 1, 15);
     private Vector3 enemy3Spawn = new(-15, 1, 0);
+    [SerializeField] private bool isRound1 = false;
+    [SerializeField] private bool isRound2 = false;
+    [SerializeField] private bool isRound3 = false;
     [SerializeField] private bool allEnemiesSpawned = false;
 
 
@@ -27,16 +33,37 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (allEnemiesSpawned == true)
-        {
-            RoundVictory();
-        }
-        
+        Round1Check();
+        Round2Check();
+        Round3Check();
+
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     private void RoundVictory()
     {
-        if (transform.childCount == 0)
+        if (isRound1 == true && isRound2 == false)
+        {
+            roundsUI.SetActive(true);
+            round1Button.SetActive(true);
+            round2Button.SetActive(true);
+            allEnemiesSpawned = false;
+        }
+
+        if (isRound2 == true && isRound3 == false)
+        {
+            roundsUI.SetActive(true);
+            round1Button.SetActive(true);
+            round2Button.SetActive(true);
+            round3Button.SetActive(true);
+            allEnemiesSpawned = false;
+        }
+
+        if (isRound3 == true)
         {
             roundsUI.SetActive(true);
             allEnemiesSpawned = false;
@@ -108,5 +135,47 @@ public class GameManager : MonoBehaviour
     {
         Instantiate(enemy3, enemy3Spawn, enemy3.transform.rotation, transform);
         Instantiate(enemy3, enemy3Spawn + (Vector3.right * 30), enemy3.transform.rotation, transform);
+    }
+
+    private void Round1Check()
+    {
+        if (isRound1 == false && allEnemiesSpawned == true)
+        {
+            if (transform.childCount == 0)
+            {
+                isRound1 = true;
+                RoundVictory();
+
+            }
+        }
+        
+    }
+
+    private void Round2Check()
+    {
+        if (isRound2 == false && allEnemiesSpawned == true)
+        {
+            if (transform.childCount == 0)
+            {
+                isRound2 = true;
+                RoundVictory();
+
+            }
+        }
+        
+    }
+
+    private void Round3Check()
+    {
+        if (isRound3 == false && allEnemiesSpawned == true)
+        {
+            if (transform.childCount == 0)
+            {
+                isRound3 = true;
+                RoundVictory();
+
+            }
+        }
+        
     }
 }
