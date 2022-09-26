@@ -20,6 +20,7 @@ public class Health : MonoBehaviour
         
     }
 
+    // ABSTRACTION
     public void DamagePlayer(int damage)
     {
         currentHealth -= damage;
@@ -27,6 +28,7 @@ public class Health : MonoBehaviour
         healthBar.value = currentHealth;
     }
 
+    // ABSTRACTION
     public void HealPlayer(int heal)
     {
         currentHealth += heal;

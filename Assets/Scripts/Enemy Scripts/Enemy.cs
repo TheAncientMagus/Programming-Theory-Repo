@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    // INHERITANCE
     [SerializeField] protected GameObject player;
     [SerializeField] protected Rigidbody enemyRb;
     [SerializeField] protected Health playerHealth;
@@ -18,6 +19,7 @@ public class Enemy : MonoBehaviour
     protected int attackSpeed;
     [SerializeField]protected bool isAttack = false;
 
+    // INHERITANCE
     void Awake()
     {
         player = GameObject.Find("Player");
@@ -34,6 +36,7 @@ public class Enemy : MonoBehaviour
         EnemyBoundary();
     }
 
+    // ABSTRACTION
     public virtual void SetEnemyStats()
     {
         moveSpeed = 5;
@@ -44,6 +47,7 @@ public class Enemy : MonoBehaviour
         currentHealth = maxHealth;
     }
 
+    // ABSTRACTION
     public virtual void DamageEnemy(int damage)
     {
         currentHealth -= damage;
@@ -54,6 +58,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    // ABSTRACTION
     public virtual void EnemyMovementAI()
     {
         Vector3 lookDirection = (player.transform.position - transform.position).normalized;
@@ -64,6 +69,8 @@ public class Enemy : MonoBehaviour
         
     }
 
+    // ABSTRACTION
+    // INHERITANCE
     public void EnemyBoundary()
     {
         if (transform.position.x > xBoundary)
@@ -87,6 +94,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    // ABSTRACTION
     public virtual void EnemyAttackAI()
     {
         Vector3 repelDirection = (transform.position - player.transform.position).normalized;

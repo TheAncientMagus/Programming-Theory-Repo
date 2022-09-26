@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     public GameObject round1Button;
     public GameObject round2Button;
     public GameObject round3Button;
-    public GameObject mainMenuButton;
     private Vector3 enemy1Spawn = new(0, 1, -15);
     private Vector3 enemy2Spawn = new(0, 1, 15);
     private Vector3 enemy3Spawn = new(-15, 1, 0);
@@ -44,6 +43,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    // ABSTRACTION
     private void RoundVictory()
     {
         if (isRound1 == true && isRound2 == false)
@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // ABSTRACTION
     public void Round1()
     {
         
@@ -83,6 +84,7 @@ public class GameManager : MonoBehaviour
 
     }
 
+    // ABSTRACTION
     public void Round2()
     {
         roundsUI.SetActive(false);
@@ -96,6 +98,7 @@ public class GameManager : MonoBehaviour
         Invoke(nameof(RoundOngoing), 13.1f);
     }
 
+    // ABSTRACTION
     public void Round3()
     {
         roundsUI.SetActive(false);
@@ -113,11 +116,13 @@ public class GameManager : MonoBehaviour
         Invoke(nameof(RoundOngoing), 21.1f);
     }
 
+    // ABSTRACTION
     private void RoundOngoing()
     {
         allEnemiesSpawned = true;
     }
 
+    // ABSTRACTION
     private void Enemy1Spawner()
     {
         Instantiate(enemy1, enemy1Spawn, enemy1.transform.rotation, transform);
@@ -125,18 +130,21 @@ public class GameManager : MonoBehaviour
         Instantiate(enemy1, enemy1Spawn + (Vector3.right * 2), enemy1.transform.rotation, transform);
     }
 
+    // ABSTRACTION
     private void Enemy2Spawner()
     {
         Instantiate(enemy2, enemy2Spawn, enemy2.transform.rotation, transform);
         Instantiate(enemy2, enemy1Spawn, enemy2.transform.rotation, transform);
     }
 
+    // ABSTRACTION
     private void Enemy3Spawner()
     {
         Instantiate(enemy3, enemy3Spawn, enemy3.transform.rotation, transform);
         Instantiate(enemy3, enemy3Spawn + (Vector3.right * 30), enemy3.transform.rotation, transform);
     }
 
+    // ABSTRACTION
     private void Round1Check()
     {
         if (isRound1 == false && allEnemiesSpawned == true)
@@ -151,6 +159,7 @@ public class GameManager : MonoBehaviour
         
     }
 
+    // ABSTRACTION
     private void Round2Check()
     {
         if (isRound2 == false && allEnemiesSpawned == true)
@@ -165,6 +174,7 @@ public class GameManager : MonoBehaviour
         
     }
 
+    // ABSTRACTION
     private void Round3Check()
     {
         if (isRound3 == false && allEnemiesSpawned == true)

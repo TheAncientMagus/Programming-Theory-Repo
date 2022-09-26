@@ -25,6 +25,7 @@ public class Enemy2 : Enemy
         EnemyBoundary();
     }
 
+    // POLYMORPHISM
     public override void SetEnemyStats()
     {
         moveSpeed = 10;
@@ -35,6 +36,7 @@ public class Enemy2 : Enemy
         currentHealth = maxHealth;
     }
 
+    // POLYMORPHISM
     public override void DamageEnemy(int damage)
     {
         currentHealth -= damage;
@@ -45,6 +47,7 @@ public class Enemy2 : Enemy
         }
     }
 
+    // POLYMORPHISM
     public override void EnemyMovementAI()
     {
         Vector3 fleeDirection = (transform.position - player.transform.position).normalized;
@@ -61,6 +64,7 @@ public class Enemy2 : Enemy
         }
     }
 
+    // POLYMORPHISM
     public override void EnemyAttackAI()
     {
         Vector3 playerDirection = (player.transform.position - transform.position).normalized;

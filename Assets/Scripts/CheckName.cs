@@ -22,11 +22,13 @@ public class CheckName : MonoBehaviour
         
     }
 
+    // ABSTRACTION
     public void StartGame()
     {
         SceneManager.LoadScene(1);
     }
 
+    // ABSTRACTION
     public void CheckText()
     {
         if (inputField.text.Length > 12)

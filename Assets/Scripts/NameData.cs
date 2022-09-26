@@ -7,6 +7,7 @@ public class NameData : MonoBehaviour
 {
     public static NameData Instance { get; private set; }
     [SerializeField] private string m_playerName = "Player";
+    // ENCAPSULATION
     public string playerName
     {
         get { return m_playerName; }

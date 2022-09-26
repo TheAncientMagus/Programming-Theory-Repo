@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
         PlayerHeal();
     }
 
+    // ABSTRACTION
     private void PlayerStats()
     {
         maxHP = 100;
@@ -62,6 +63,7 @@ public class PlayerController : MonoBehaviour
         healValue = 25;
     }
 
+    // ABSTRACTION
     public void LevelUp(int xp)
     {
         experience += xp;
@@ -81,6 +83,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Player movement controls
+    // ABSTRACTION
     void PlayerMovement()
     {
         horizontalInput = Input.GetAxis("Horizontal");
@@ -95,6 +98,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    // ABSTRACTION
     void PlayerBoundary()
     {
         if (transform.position.x > xBoundary)
@@ -119,6 +123,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Player faces the direction of movement
+    // ABSTRACTION
     void PlayerRotation()
     {
         Vector3 movementDirection = new Vector3(horizontalInput, 0, verticalInput);
@@ -133,6 +138,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Player melee attack controls
+    // ABSTRACTION
     void PlayerMelee()
     {
         if (Input.GetMouseButtonDown(0) && (isMelee == false))
@@ -145,6 +151,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Player ranged attack controls
+    // ABSTRACTION
     void PlayerRanged()
     {
         if (Input.GetMouseButtonDown(1) && isRange == false)
@@ -156,6 +163,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    // ABSTRACTION
     void PlayerHeal()
     {
 

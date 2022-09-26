@@ -28,6 +28,7 @@ public class Enemy3 : Enemy
         EnemyBoundary();
     }
 
+    // POLYMORPHISM
     public override void SetEnemyStats()
     {
         moveSpeed = 15;
@@ -39,6 +40,7 @@ public class Enemy3 : Enemy
 
     }
 
+    // POLYMORPHISM
     public override void DamageEnemy(int damage)
     {
         currentHealth -= damage;
@@ -52,6 +54,7 @@ public class Enemy3 : Enemy
     // Enemy3 will move towards the player if outside minDistance
     // Once at minDistance Enemy 3 will cirlce around the player until they finish attacking
     // They will then run away from the player
+    // POLYMORPHISM
     public override void EnemyMovementAI()
     {
         Vector3 lookDirection = (player.transform.position - transform.position).normalized;
@@ -95,6 +98,7 @@ public class Enemy3 : Enemy
        
     }
 
+    // POLYMORPHISM
     public override void EnemyAttackAI()
     {
         Vector3 playerDirection = (player.transform.position - transform.position).normalized;
@@ -106,6 +110,7 @@ public class Enemy3 : Enemy
         }
     }
 
+    // ABSTRACTION
     public void EnemyMidRangedDamage()
     {
         playerHealth.DamagePlayer(attackDamage);

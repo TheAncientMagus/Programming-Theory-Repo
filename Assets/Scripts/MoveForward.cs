@@ -21,11 +21,15 @@ public class MoveForward : MonoBehaviour
         DestroyOutOfBounds();
     }
 
+    // ABSTRACTION
+    // INHERITANCE
     public void Move()
     {
         transform.Translate(Vector3.forward * projectileSpeed * Time.deltaTime, Space.Self);
     }
 
+    // ABSTRACTION
+    // INHERITANCE
     public void DestroyOutOfBounds()
     {
         if (transform.position.x > boundary)

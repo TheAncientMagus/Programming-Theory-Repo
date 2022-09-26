@@ -27,6 +27,7 @@ public class HealthUISystem : MonoBehaviour
         SetHealth(playerHealth.currentHealth);
     }
 
+    // ABSTRACTION
     public void SetHealth(int hp)
     {
         healthBar.value = hp;
